@@ -28,6 +28,7 @@ type SimpleMdeToCodemirror = {
 export interface SimpleMDEEditorProps {
   id?: string;
   label?: string;
+  name?: string;
   onChange: (value: string) => void | any;
   value?: string;
   className?: string;
@@ -196,6 +197,7 @@ export default class SimpleMDEEditor extends React.PureComponent<
 
   render() {
     const {
+      name,
       events,
       value,
       options,
@@ -211,7 +213,7 @@ export default class SimpleMDEEditor extends React.PureComponent<
     return (
       <div id={`${this.id}-wrapper`} {...rest} ref={this.setElementWrapperRef}>
         {label && <label htmlFor={this.id}> {label} </label>}
-        <textarea id={this.id} />
+        <textarea id={this.id} name={name} value={value} onChange={({ target: { value } }) => onChange(value)} />
       </div>
     );
   }
